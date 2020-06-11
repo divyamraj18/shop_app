@@ -16,7 +16,7 @@ class Product with ChangeNotifier {
     @required this.description,
     @required this.price,
     @required this.imageUrl,
-    this.isFavourite = false,
+    this.isFavourite,
   });
   Future<void> toggleFavoriteStatus() async {
     final oldStatus = isFavourite;

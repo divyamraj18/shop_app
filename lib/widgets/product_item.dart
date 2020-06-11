@@ -15,7 +15,7 @@ class ProductItem extends StatelessWidget {
 //      );
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context, listen: false);
+    final product = Provider.of<Product>(context);
     final cart = Provider.of<Cart>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
@@ -35,7 +35,7 @@ class ProductItem extends StatelessWidget {
           backgroundColor: Colors.black38,
           leading: Consumer<Product>(
             builder: (ctx, product, child) => IconButton(
-              splashColor: Colors.green,
+              //splashColor: Colors.green,
               icon: Icon(
                 product.isFavourite ? Icons.favorite : Icons.favorite_border,
                 color: Theme.of(context).accentColor,

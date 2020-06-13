@@ -41,24 +41,28 @@ class Products with ChangeNotifier {
           throw error;
     });
   }*/
-  Future<void> fetchAndSetProducts() async {
+  Future<bool> fetchAndSetProducts() async {
     const url = 'https://flutter-update-ed8e5.firebaseio.com/product.json';
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final List<Product> loadedProduct = [];
-      extractedData.forEach((prodId, prodData) {
-        loadedProduct.add(Product(
-            id: prodId,
-            title: prodData['title'],
-            description: prodData['description'],
-            price: prodData['price'],
-            imageUrl: prodData['imageUrl'],
-            isFavourite: prodData['isFavorite'],
-        ));
-            });
-      _items=loadedProduct;
-      notifyListeners();
+      if(extractedData==null)
+        {
+          return null;
+        }
+          extractedData.forEach((prodId, prodData) {
+            loadedProduct.add(Product(
+              id: prodId,
+              title: prodData['title'],
+              description: prodData['description'],
+              price: prodData['price'],
+              imageUrl: prodData['imageUrl'],
+              isFavourite: prodData['isFavorite'],
+            ));
+          });
+          _items=loadedProduct;
+          notifyListeners();
     } catch (error) {
       throw error;
     }

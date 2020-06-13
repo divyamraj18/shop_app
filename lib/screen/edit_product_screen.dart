@@ -17,7 +17,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _imageUrlFocusNode = FocusNode();
   final _form = GlobalKey<FormState>();
   var _editedProduct =
-      Product(id: null, title: '', description: '', price: 0, imageUrl: '');
+      Product(id: null, title: '', description: '', price: 0, imageUrl: '',isFavourite: false);
   var _initValues = {
     'title': '',
     'description': '',

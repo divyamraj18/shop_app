@@ -29,10 +29,17 @@ class ProductItem extends StatelessWidget {
                 arguments: product.id,
               );
             },
-            child: Image.network(
-              product.imageUrl,
-              fit: BoxFit.cover,
-            )),
+            child: Hero(
+              tag: product.id,
+              child: FadeInImage(
+                fit: BoxFit.cover,
+                placeholder: AssetImage('assets/images/product-placeholder.png'),
+                image: NetworkImage(
+                  product.imageUrl,
+                ),
+              ),
+            )
+        ),
         footer: GridTileBar(
           backgroundColor: Colors.black38,
           leading: Consumer<Product>(

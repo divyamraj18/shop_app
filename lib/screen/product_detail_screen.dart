@@ -15,40 +15,52 @@ class ProductDetailScreen extends StatelessWidget {
     final productId = ModalRoute.of(context).settings.arguments as String;
     final loadedProduct = Provider.of<Products>(context).findbyId(productId);
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: Text(loadedProduct.title),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height * .8,
+      ),*/
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: MediaQuery.of(context).size.height,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(title: Text(loadedProduct.title),
+            background: Hero(
+              tag: productId,
               child: Image.network(
                 loadedProduct.imageUrl,
                 fit: BoxFit.cover,
               ),
             ),
+            ),
+          ),
+          SliverList(delegate: SliverChildListDelegate([
             SizedBox(
               height: 10,
             ),
             Text(
               '\$${loadedProduct.price}',
-              style: TextStyle(color: Colors.grey, fontSize: 20),
+              style: TextStyle(color: Colors.grey, fontSize: 20,),
+              textAlign: TextAlign.center,
+
             ),
             SizedBox(
               height: 10,
             ),
             Container(
-              width: double.infinity,
+                width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Text(
-              loadedProduct.description,
-              textAlign: TextAlign.center,
-              softWrap: true,
-            )),
-          ],
-        ),
+                  loadedProduct.description,
+                  textAlign: TextAlign.center,
+                  softWrap: true,
+                ),
+            ),
+            SizedBox(height: 800,)
+          ]
+          )
+          ),
+        ],
+
       ),
     );
   }
